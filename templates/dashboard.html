@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <h1>Hello Researcher</h1>
+
+  <div class="input-options">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" id="fileInput" name="file" required style="display: none;" onchange="handleFileUpload()" />
+      <button type="button" onclick="uploadFile()">Upload File</button>
+    </form>
+    <button onclick="inputText()">Input Text</button>
+  </div>
+
+  <div id="textInputContainer" style="display: none;">
+    <form action="/text" method="POST">
+      <input type="text" name="filename" id="textFileName" placeholder="Enter file name" />
+      <button type="submit" onclick="showLoader()">Search</button>
+    </form>
+  </div>
+
+  <p style="text-align:center;">Processing, please wait...</p>
+
+  <script>
+    function inputText() {
+      document.getElementById("textInputContainer").style.display = "block";
+    }
+
+    function showLoader() {
+      const container = document.getElementById('progress-container');
+      const bar = document.getElementById('progress-bar');
+      container.style.display = 'block';
+      let width = 0;
+
+      const interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+        } else {
+          width += 2;
+          bar.style.width = width + '%';
+        }
+      }, 20);
+    }
+  </script>
+
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

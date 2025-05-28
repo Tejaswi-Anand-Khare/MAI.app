@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-body">
+  <header>
+    <div class="logo">LOGO .</div>
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="#">Blog</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <div class="auth-buttons">
+        <button onclick="login()">Sign In</button>
+        <button onclick="toggleForm()">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="login-container">
+    <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="👤 Username or Email" />
+    <input type="password" id="login-password" placeholder="🔒 Password" />
+    <button onclick="showLoaderAndLogin()">Sign In</button>
+    <div class="login-options">
+      <label><input type="checkbox"> Remember Me</label>
+      <a href="#">Forgot password?</a>
+    </div>
+  </main>
+
+  <div id="loader" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:1000;">
+    <div class="spinner"></div>
+    <p style="text-align:center;">Processing, please wait...</p>
+  </div>
+
+  <script>
+    function showLoaderAndLogin() {
+      document.getElementById('loader').style.display = 'block';
+      setTimeout(() => {
+        login();
+      }, 300); // optional delay
+    }
+
+    function login() {
+      window.location.href = "/dashboard";
+    }
+
+    function toggleForm() {
+      alert("Sign-up logic goes here.");
+    }
+  </script>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
